@@ -48,6 +48,9 @@ private  final EmployeesRepository employeesRepository;
         return employeesRepository.save(employees );
     }
 
-    public Employees deleteEmployees(l)
+    public  void  deleteEmployees(long id){
+        LOGGER.info("Delete employees : {}", id);
+         employeesRepository.deleteById(id);
+    }
 
 }
