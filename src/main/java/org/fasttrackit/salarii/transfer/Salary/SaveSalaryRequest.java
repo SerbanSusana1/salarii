@@ -2,12 +2,27 @@ package org.fasttrackit.salarii.transfer.Salary;
 
 public class SaveSalaryRequest {
 
+
     private  long workingdaysmonth;
     private  long workeddays;
     private  long holidaydays;
     private  long sickdays;
     private  long withoutsalarydays;
     //private  long unmotivateddays;
+
+    @Override
+    public String toString() {
+        return "SaveSalaryRequest{" +
+
+                ", workingdaysmonth=" + workingdaysmonth +
+                ", workeddays=" + workeddays +
+                ", holidaydays=" + holidaydays +
+                ", sickdays=" + sickdays +
+                ", withoutsalarydays=" + withoutsalarydays +
+                '}';
+    }
+
+
 
     public long getWorkingdaysmonth() {
         return workingdaysmonth;
@@ -50,18 +65,6 @@ public class SaveSalaryRequest {
     }
 
 
-
-    @Override
-    public String toString() {
-        return "SaveSalaryRequest{" +
-                "workingdaysmonth=" + workingdaysmonth +
-                ", workeddays=" + workeddays +
-                ", holidaydays=" + holidaydays +
-                ", sickdays=" + sickdays +
-                ", withoutsalarydays=" + withoutsalarydays +
-
-                '}';
-    }
 }
 
 

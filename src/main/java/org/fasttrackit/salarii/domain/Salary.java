@@ -31,6 +31,14 @@ public class Salary {
     @MapsId
     private Employees employees;
 
+    public Employees getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Employees employees) {
+        this.employees = employees;
+    }
+
     public long getId() {
         return id;
     }
