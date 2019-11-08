@@ -1,4 +1,4 @@
-package org.fasttrackit.salarii.transfer;
+package org.fasttrackit.salarii.transfer.Employees;
 
 import javax.validation.constraints.NotNull;
 
@@ -81,7 +81,7 @@ public class SaveEmployeesRequest {
                 "marca=" + marca +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", salary=" + salary +
+                ", Salary=" + salary +
                 ", standardHours=" + standardHours +
                 ", personalDeduction=" + personalDeduction +
                 ", tiket=" + tiket +

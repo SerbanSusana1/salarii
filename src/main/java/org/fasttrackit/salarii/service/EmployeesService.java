@@ -3,24 +3,26 @@ package org.fasttrackit.salarii.service;
 import org.fasttrackit.salarii.domain.Employees;
 import org.fasttrackit.salarii.exception.ResourceNotFoundException;
 import org.fasttrackit.salarii.persistance.EmployeesRepository;
-import org.fasttrackit.salarii.transfer.SaveEmployeesRequest;
+import org.fasttrackit.salarii.transfer.Employees.SaveEmployeesRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.function.Supplier;
-
+@Service
 public class EmployeesService {
 
 private static final Logger LOGGER = LoggerFactory.getLogger(EmployeesService.class);
 
 private  final EmployeesRepository employeesRepository;
 
+    @Autowired
     public EmployeesService(EmployeesRepository employeesRepository) {
         this.employeesRepository = employeesRepository;
     }
 
-    public Employees createEmployes(SaveEmployeesRequest request){
+    public Employees createEmployees(SaveEmployeesRequest request){
      LOGGER.info("Create employees :", request);
      Employees employees =new Employees();
      employees.setFirstName(request.getFirstName());

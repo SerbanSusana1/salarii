@@ -97,10 +97,26 @@ private  double tiket;
                 ", marca=" + marca +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", salary=" + salary +
+                ", Salary=" + salary +
                 ", standardHours=" + standardHours +
                 ", personalDeduction=" + personalDeduction +
                 ", tiket=" + tiket +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employees employees = (Employees) o;
+
+        return id == employees.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
     }
 }
