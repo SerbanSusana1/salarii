@@ -2,22 +2,16 @@ package org.fasttrackit.salarii.transfer.Employees;
 
 import javax.validation.constraints.NotNull;
 
-public class SaveEmployeesRequest {
+public class AddEmployeesRequest {
 
-    @NotNull
     private long marca;
-    @NotNull
+
     private  String firstName;
-    @NotNull
+
     private  String lastName;
-    @NotNull
+
     private  long salary;
-    @NotNull
-    private  int standardHours;
-    @NotNull
-    private  int personalDeduction;
-    @NotNull
-    private  long tiket;
+
 
     public long getMarca() {
         return marca;
@@ -51,40 +45,14 @@ public class SaveEmployeesRequest {
         this.salary = salary;
     }
 
-    public int getStandardHours() {
-        return standardHours;
-    }
-
-    public void setStandardHours(int standardHours) {
-        this.standardHours = standardHours;
-    }
-
-    public int getPersonalDeduction() {
-        return personalDeduction;
-    }
-
-    public void setPersonalDeduction(int personalDeduction) {
-        this.personalDeduction = personalDeduction;
-    }
-
-    public long getTiket() {
-        return tiket;
-    }
-
-    public void setTiket(long tiket) {
-        this.tiket = tiket;
-    }
-
     @Override
     public String toString() {
-        return "SaveEmployeesRequest{" +
+        return "AddEmployeesRequest{" +
                 "marca=" + marca +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", Salary=" + salary +
-                ", standardHours=" + standardHours +
-                ", personalDeduction=" + personalDeduction +
-                ", tiket=" + tiket +
+                ", salary=" + salary +
                 '}';
     }
 }
+

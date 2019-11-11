@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 public class Salary {
     @Id
     private long id;
+    private long marca;
 
     @NotNull
     private  long workingdaysmonth;
@@ -24,7 +25,7 @@ public class Salary {
     private  long netincome;
     private  long righttikets;
     private  long tax;
-    private  long netwage;
+    private  long taxable;
 
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -33,6 +34,38 @@ public class Salary {
 
     public Employees getEmployees() {
         return employees;
+    }
+
+    public long getMarca() {
+        return marca;
+    }
+
+    @Override
+    public String toString() {
+        return "Salary{" +
+                "id=" + id +
+                ", marca=" + marca +
+                ", workingdaysmonth=" + workingdaysmonth +
+                ", workeddays=" + workeddays +
+                ", holidaydays=" + holidaydays +
+                ", sickdays=" + sickdays +
+                ", withoutsalarydays=" + withoutsalarydays +
+                ", rightworkeddays=" + rightworkeddays +
+                ", rightholidaydays=" + rightholidaydays +
+                ", rightsickdays=" + rightsickdays +
+                ", brutincome=" + brutincome +
+                ", CAS=" + CAS +
+                ", CASS=" + CASS +
+                ", netincome=" + netincome +
+                ", righttikets=" + righttikets +
+                ", tax=" + tax +
+                ", taxable=" + taxable +
+                ", employees=" + employees +
+                '}';
+    }
+
+    public void setMarca(long marca) {
+        this.marca = marca;
     }
 
     public void setEmployees(Employees employees) {
@@ -160,35 +193,12 @@ public class Salary {
         this.tax = tax;
     }
 
-    public long getNetwage() {
-        return netwage;
+    public long getTaxable() {
+        return taxable;
     }
 
-    public void setNetwage(long netwage) {
-        this.netwage = netwage;
-    }
-
-    @Override
-    public String toString() {
-        return "Salary{" +
-                "id=" + id +
-                ", workingdaysmonth=" + workingdaysmonth +
-                ", workeddays=" + workeddays +
-                ", holidaydays=" + holidaydays +
-                ", sickdays=" + sickdays +
-                ", withoutsalarydays=" + withoutsalarydays +
-
-                ", rightworkeddays=" + rightworkeddays +
-                ", rightholidaydays=" + rightholidaydays +
-                ", rightsickdays=" + rightsickdays +
-                ", brutincome=" + brutincome +
-                ", CAS=" + CAS +
-                ", CASS=" + CASS +
-                ", netincome=" + netincome +
-                ", righttikets=" + righttikets +
-                ", tax=" + tax +
-                ", netwage=" + netwage +
-                '}';
+    public void setTaxable(long taxable) {
+        this.taxable = taxable;
     }
 
     @Override

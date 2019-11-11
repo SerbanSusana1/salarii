@@ -13,6 +13,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SalaryService {
 
@@ -31,30 +33,45 @@ public class SalaryService {
     }
 
 
-    public Salary createSalary(AddEmployeesToSalary request1, SaveSalaryRequest request) {
-        LOGGER.info("Create salary: ", request1);
+    public Salary createSalary(AddEmployeesToSalary addEmployeesToSalary, SaveSalaryRequest request) {
+        LOGGER.info("Create salary: ", addEmployeesToSalary);
 
-        Employees employee = employeesRepository.findById(request1.getEmployeesId())
-                .orElseThrow(() -> new ResourceNotFoundException("Not found employee: " + request1.getEmployeesId()));
 
-        Salary salary = salaryRepository.findById(request1.getEmployeesId())
-                .orElse(new Salary());
 
-        if (salary.getEmployees() == null) {
-            LOGGER.info("Employees doesnt exist");
-            Employees employees = employeesService.getEmployees(request1.getEmployeesId());
-            salary.setEmployees(employees);
-            salary.setId(employees.getId());
+        Employees employee = employeesRepository.findByMarca(request.getMarca());
+
+        if (employee == null) {
+            throw new ResourceNotFoundException("Not found employee: " + request.getMarca());
         }
 
-        salary.setWorkingdaysmonth(request.getWorkingdaysmonth());
-        salary.setWorkeddays(request.getWorkeddays());
-        salary.setHolidaydays(request.getHolidaydays());
-        salary.setSickdays(request.getSickdays());
-        salary.setWithoutsalarydays(request.getWithoutsalarydays());
-        // salary.setUnmotivateddays(request.getUnmotivateddays());
-        salaryRepository.save(salary);
+        Salary salary = salaryRepository.findByEmployeesId(employee.getId());
 
+        if (salary == null) {
+            Salary salary1 = new Salary();
+
+            LOGGER.info("salary doesnt exist");
+            salary1.setEmployees(employee);
+            salary1.setId(employee.getId());
+
+            salary1.setWorkingdaysmonth(request.getWorkingdaysmonth());
+            salary1.setWorkeddays(request.getWorkeddays());
+            salary1.setHolidaydays(request.getHolidaydays());
+            salary1.setSickdays(request.getSickdays());
+            salary1.setWithoutsalarydays(request.getWithoutsalarydays());
+
+            salary1.setRightworkeddays(request.getWorkeddays() * (employee.getSalary() / request.getWorkingdaysmonth()));
+            salary1.setRightholidaydays(request.getHolidaydays() * (employee.getSalary() / request.getWorkingdaysmonth()));
+            salary1.setRightsickdays(request.getSickdays() * (employee.getSalary() / request.getWorkingdaysmonth()));
+            salary1.setbrutincome(request.getRightsickdays() + request.getRightholidaydays() + request.getWorkeddays());
+            salary1.setCAS(request.getBrutincome() * 25 / 100);
+            salary1.setCASS(request.getBrutincome() * 10 / 100);
+            salary1.setTaxable(request.getBrutincome() - request.getCAS() - request.getCASS());
+            salary1.setTax(request.getTaxable() * 16 / 100);
+            salary1.setRighttikets(request.getWorkeddays() * employee.getTiket());
+            salary1.setNetincome(request.getTaxable() - request.getTax() - request.getRighttikets());
+
+            salaryRepository.save(salary1);
+        }
         return salary;
     }
 

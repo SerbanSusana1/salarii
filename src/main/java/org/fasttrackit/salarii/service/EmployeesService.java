@@ -3,12 +3,22 @@ package org.fasttrackit.salarii.service;
 import org.fasttrackit.salarii.domain.Employees;
 import org.fasttrackit.salarii.exception.ResourceNotFoundException;
 import org.fasttrackit.salarii.persistance.EmployeesRepository;
+import org.fasttrackit.salarii.transfer.Employees.EmployeesResponse;
+import org.fasttrackit.salarii.transfer.Employees.GetEmployeesRequest;
 import org.fasttrackit.salarii.transfer.Employees.SaveEmployeesRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EmployeesService {
@@ -37,12 +47,42 @@ public class EmployeesService {
 
     }
 
+
     public Employees getEmployees(long id) {
         LOGGER.info("Retrieving employees : {}", id);
         return employeesRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employees" + id + "not found"));
     }
+
+
+    @Transactional
+    public PageImpl getEmployeess(GetEmployeesRequest request, Pageable pageable) {
+        LOGGER.info("Retrieving employees: {}", request);
+
+        Page<Employees> employeess = null;
+
+        employeess = employeesRepository.findAll(pageable);
+
+        List<EmployeesResponse> employeesResponses = new ArrayList<>();
+
+        for (Employees employees : employeess.getContent()) {
+            EmployeesResponse employeesResponse = new EmployeesResponse();
+            employeesResponse.setMarca(employees.getMarca());
+            employeesResponse.setFirstName(employees.getFirstName());
+            employeesResponse.setLastName(employees.getLastName());
+            employeesResponse.setSalary(employees.getSalary());
+
+            employeesResponses.add(employeesResponse);
+
+        }
+
+
+        return new PageImpl<>(employeesResponses, pageable, employeess.getTotalElements());
+
+
+    }
+
 
     public Employees updateEmployees(long id, SaveEmployeesRequest request) {
         LOGGER.info("Update employees {}: {}", id, request);

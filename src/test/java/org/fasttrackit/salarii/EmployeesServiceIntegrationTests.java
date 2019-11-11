@@ -96,7 +96,7 @@ public class EmployeesServiceIntegrationTests {
         request.setSalary(3000);
         request.setPersonalDeduction(300);
         request.setStandardHours(8);
-        request.setTiket(19.5);
+        request.setTiket(19L);
 
         Employees employees = employeesService.createEmployees(request);
 

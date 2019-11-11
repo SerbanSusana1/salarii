@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/salaries")
 public class SalaryController {
@@ -25,25 +26,26 @@ public class SalaryController {
 
     @PostMapping
     public ResponseEntity<Salary> createSalary
-       (@RequestBody @Valid AddEmployeesToSalary toSalary, @RequestBody SaveSalaryRequest request){
-        Salary salary =salaryService.createSalary(toSalary, request);
+            (@Valid AddEmployeesToSalary toSalary, @RequestBody SaveSalaryRequest request) {
+        Salary salary = salaryService.createSalary(toSalary, request);
         return new ResponseEntity<>(salary, HttpStatus.CREATED);
     }
 
     @GetMapping("/id")
-    public ResponseEntity<Salary> getSalary(@PathVariable("id") long id){
+    public ResponseEntity<Salary> getSalary(@PathVariable("id") long id) {
         Salary salary = salaryService.getSalary(id);
-        return  new ResponseEntity<>(salary, HttpStatus.OK);
+        return new ResponseEntity<>(salary, HttpStatus.OK);
 
     }
+
     @PutMapping("/id")
-    public ResponseEntity<Salary> updateSalary(@PathVariable("id") long id, @RequestBody SaveSalaryRequest request){
+    public ResponseEntity<Salary> updateSalary(@PathVariable("id") long id, @RequestBody SaveSalaryRequest request) {
         Salary salary = salaryService.updateSalary(id, request);
-        return  new ResponseEntity<>(salary, HttpStatus.OK);
+        return new ResponseEntity<>(salary, HttpStatus.OK);
     }
 
     @DeleteMapping("/id")
-    public ResponseEntity<Salary> deleteSalary(@PathVariable("id") long id){
+    public ResponseEntity<Salary> deleteSalary(@PathVariable("id") long id) {
         salaryService.deleteSalary(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

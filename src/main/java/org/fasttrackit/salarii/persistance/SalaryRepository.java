@@ -4,4 +4,8 @@ import org.fasttrackit.salarii.domain.Salary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SalaryRepository extends JpaRepository<Salary, Long> {
+
+    Salary findByEmployeesId (long employeesId);
 }
+
+

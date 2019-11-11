@@ -24,7 +24,7 @@ private  int standardHours;
 @NotNull
 private  int personalDeduction;
 @NotNull
-private  double tiket;
+private  long tiket;
 
     public long getId() {
         return id;
@@ -82,12 +82,8 @@ private  double tiket;
         this.personalDeduction = personalDeduction;
     }
 
-    public double getTiket() {
+    public long getTiket() {
         return tiket;
-    }
-
-    public void setTiket(double tiket) {
-        this.tiket = tiket;
     }
 
     @Override
@@ -97,11 +93,15 @@ private  double tiket;
                 ", marca=" + marca +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", Salary=" + salary +
+                ", salary=" + salary +
                 ", standardHours=" + standardHours +
                 ", personalDeduction=" + personalDeduction +
                 ", tiket=" + tiket +
                 '}';
+    }
+
+    public void setTiket(long tiket) {
+        this.tiket = tiket;
     }
 
     @Override
