@@ -52,7 +52,7 @@ public class SalaryService {
             LOGGER.info("salary doesnt exist");
             salary1.setEmployees(employee);
             salary1.setId(employee.getId());
-
+            salary1.setMarca(employee.getMarca());
             salary1.setWorkingdaysmonth(request.getWorkingdaysmonth());
             salary1.setWorkeddays(request.getWorkeddays());
             salary1.setHolidaydays(request.getHolidaydays());
@@ -62,8 +62,12 @@ public class SalaryService {
             salary1.setRightworkeddays(request.getWorkeddays() * (employee.getSalary() / request.getWorkingdaysmonth()));
             salary1.setRightholidaydays(request.getHolidaydays() * (employee.getSalary() / request.getWorkingdaysmonth()));
             salary1.setRightsickdays(request.getSickdays() * (employee.getSalary() / request.getWorkingdaysmonth()));
-            salary1.setbrutincome(request.getRightsickdays() + request.getRightholidaydays() + request.getWorkeddays());
-            salary1.setCAS(request.getBrutincome() * 25 / 100);
+            //long a=request.getRightholidaydays();
+            //long b = request.getRightworkeddays();
+            //long c = request.getRightsickdays();
+            //salary1.setbrutincome(a+b+c);
+            salary1.setbrutincome(request.getRightholidaydays() + request.getRightworkeddays()+request.getRightsickdays());
+            salary1.setCAS((request.getRightholidaydays() + request.getRightworkeddays()+request.getRightsickdays()) *25/100);
             salary1.setCASS(request.getBrutincome() * 10 / 100);
             salary1.setTaxable(request.getBrutincome() - request.getCAS() - request.getCASS());
             salary1.setTax(request.getTaxable() * 16 / 100);
